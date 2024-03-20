@@ -32,11 +32,15 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          '${BlocProvider.of<CounterCubit>(context).state.counter}',
-          style: TextStyle(fontSize: 52.0),
-        ),
+      body: BlocBuilder<CounterCubit, CounterState>(
+        builder: (context, state) {
+          return Center(
+            child: Text(
+              '${state.counter}',
+              style: TextStyle(fontSize: 52.0),
+            ),
+          );
+        },
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -61,3 +65,39 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
+
+// class MyHomePage extends StatelessWidget {
+//   const MyHomePage({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Center(
+//         child: Text(
+//           '${BlocProvider.of<CounterCubit>(context, listen: true).state.counter}',
+//           style: TextStyle(fontSize: 52.0),
+//         ),
+//       ),
+//       floatingActionButton: Row(
+//         mainAxisAlignment: MainAxisAlignment.end,
+//         children: [
+//           FloatingActionButton(
+//             onPressed: () {
+//               BlocProvider.of<CounterCubit>(context).increment();
+//             },
+//             heroTag: 'increment',
+//             child: const Icon(Icons.add),
+//           ),
+//           const SizedBox(width: 10.0),
+//           FloatingActionButton(
+//             onPressed: () {
+//               BlocProvider.of<CounterCubit>(context).decrement();
+//             },
+//             heroTag: 'decrement',
+//             child: const Icon(Icons.remove),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
